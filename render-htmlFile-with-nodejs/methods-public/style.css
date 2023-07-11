@@ -1,0 +1,52 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 24px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form > * {
+  margin: 7px;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-input > input {
+  padding: 8px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}
+
+form > button {
+  padding: 8px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  background: rgb(236, 138, 154);
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+}
+
+form > h5 {
+  font-size: 28px;
+  text-align: center;
+}

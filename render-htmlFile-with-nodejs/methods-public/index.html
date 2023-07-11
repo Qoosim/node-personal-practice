@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Node Practice</title>
+</head>
+
+<body>
+  <main>
+    <form>
+      <h5>Data Collections</h5>
+      <div class="form-input">
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" required autocomplete="false">
+        <small class="alert"></small>
+      </div>
+      <button type="submit" class="btn">Add</button>
+    </form>
+    <div class="result"></div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  <script>
+    const result = document.querySelector('.result');
+
+    const fetchPeople = async () => {
+      try {
+        const { data } = await axios.get('/api/people');
+        console.log(data.data);
+        const people = data.data.map((person) => {
+          return `<h5>${person.name}</h5>`
+        })  
+        result.innerHTML = people.join('');
+      } catch (error) {
+        result.innerHTML = '<div>Unable to fetch the data</div>';
+      }
+    }
+    fetchPeople();
+
+    const input = document.getElementById('name');
+    const btn = document.querySelector('.btn');
+    const alert = document.querySelector('.alert');
+
+    btn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const inputValue = input.value;
+      try {
+        const { data } = await axios.post('/api/people', { name: inputValue });
+        console.log(data);
+        const h5 = document.createElement('h5');
+        h5.textContent = data.person;
+        result.appendChild(h5);
+      } catch (error) {
+        alert.textContent = error.data.response.msg; 
+      }
+      input.value = '';
+    })
+  
+  </script>
+</body>
+
+</html>
